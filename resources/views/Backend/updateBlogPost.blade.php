@@ -32,10 +32,14 @@
                 </select>
             </div>
             <div class="form-group">
+                <input type="checkbox" name="Feature" {{$blogPost->Feature ? 'checked' : ''}}> Feature Post Yes
+                <input type="checkbox" name="Tranding" {{$blogPost->Tranding ? 'checked' : ''}}> Tranding Post Yes
+            </div>
+            <div class="form-group">
                 <label for="postImage">Post Image</label>
                 <input type="file" class="form-control-file" name="Post_Image" id="postImage" accept="image/*" >
             </div>
-            <button type="submit" class="btn btn-primary">Create Post</button>
+            <button type="submit" class="btn btn-primary">Update Post</button>
         </form>
     </div>
 @endsection

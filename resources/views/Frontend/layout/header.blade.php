@@ -5,7 +5,7 @@
             <nav class="navbar navbar-expand-sm bg-dark p-0">
                 <ul class="navbar-nav ml-n2">
                     <li class="nav-item border-secondary">
-                        <a  class="nav-link text-body small" href="#">Monday, January 1, 2045</a>
+                        <a id="currentDateTime" class="nav-link text-white font-weight-bold" href="#"></a>
                     </li>
                 </ul>
             </nav>
@@ -15,17 +15,24 @@
                 <ul class="navbar-nav ml-auto mr-n2">
                     <!-- Language Dropdown -->
                     <li class="nav-item dropdown p-2">
-                        <a class="nav-link btn dropdown-toggle text-body small" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link btn dropdown-toggle text-white font-weight-bold small" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-globe"></i> Language
                         </a>
                         <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                            <a class="dropdown-item" href="#"><i class="fas fa-flag-usa"></i> English</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-flag"></i> Bangla</a>
+                            <a class="dropdown-item text-black-50 font-weight-bold" href="#">
+                                <img src="https://i.ibb.co/3BbDhzR/american-flag-eagle-united-states-usa-wallpaper-thumb.jpg" alt="English" style="width: 20px; height: auto;"> English
+                            </a>
+                            <a class="dropdown-item text-black-50 font-weight-bold" href="#">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg" alt="Bangla" style="width: 20px; height: auto;"> Bangla
+                            </a>
                         </div>
                     </li>
+
                     <!-- Login Button -->
                     <li class="nav-item p-3">
-                        <a class="btn btn-primary btn-sm ml-2" href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a class="btn btn-primary btn-sm ml-2 font-weight-bold" href="#">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -58,9 +65,9 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-                <a href="{{url('/')}}" class="nav-item nav-link active">Home</a>
-                @foreach($data as $category)
-                <a href="" class="nav-item nav-link">{{$category->name}}</a>
+                <a href="{{url('/')}}" class="nav-item nav-link ">Home</a>
+                @foreach($categories as $category)
+                <a href="{{route('Frontend.categoryPost', $category->id)}}" class="nav-item nav-link">{{$category->name}}</a>
                 @endforeach
             </div>
 
@@ -75,68 +82,3 @@
     </nav>
 </div>
 <!-- Navbar End -->
-
-
-<!-- Main News Slider Start -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-7 px-0">
-            <div class="owl-carousel main-carousel position-relative">
-                @foreach($slider as $slide)
-                <div class="position-relative overflow-hidden" style="height: 500px;">
-                    <img class="img-fluid h-100" src="{{env('STORAGE_PATH')}}/{{$slide->Post_Image}}" style="object-fit: cover;">
-                    <div class="overlay">
-                        <div class="mb-2">
-                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                               href="">{{ $slide->category->name}}</a>
-                            <a class="text-white" href="">{{ date('d-m-Y', strtotime($slide->created_at))}}</a>
-                        </div>
-                        <a class="h2 m-0 text-white text-uppercase font-weight-bold" href="">{{Str::limit($slide->Post_Title, 40, ' ...')}}</a>
-                    </div>
-                </div>
-                    @endforeach
-            </div>
-        </div>
-        <div class="col-lg-5 px-0">
-            <div class="row mx-0">
-                @foreach($card as $item)
-                <div class="col-md-6 px-0">
-                    <div class="position-relative overflow-hidden" style="height: 250px;">
-                        <img class="img-fluid w-100 h-100" src="{{env('STORAGE_PATH')}}/{{$item->Post_Image}}" style="object-fit: cover;">
-                        <div class="overlay">
-                            <div class="mb-2">
-                                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                   href="">{{ $item->category->name}}</a>
-                                <a class="text-white" href=""><small>{{ date('d-m-Y', strtotime($item->created_at))}}</small></a>
-                            </div>
-                            <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold" href="">{{Str::limit($item->Post_Title, 30, ' ...')}}</a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Main News Slider End -->
-
-
-<!-- Breaking News Start -->
-<div class="container-fluid bg-dark py-3 mb-3">
-    <div class="container">
-        <div class="row align-items-center bg-dark">
-            <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <div class="bg-primary text-dark text-center font-weight-medium py-2" style="width: 170px;">Breaking News</div>
-                    <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center ml-3"
-                         style="width: calc(100% - 170px); padding-right: 90px;">
-                        @foreach($breaking as $break)
-                        <div class="text-truncate"><a class="text-white text-uppercase font-weight-semi-bold" href="">{{$break->Post_Title}}</a></div>
-                            @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Breaking News End -->

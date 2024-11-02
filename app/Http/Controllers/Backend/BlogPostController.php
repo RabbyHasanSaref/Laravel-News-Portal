@@ -16,7 +16,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        $blogPost = BlogPost::with('category')->get();
+        $blogPost = BlogPost::with(['category', 'author'])->get();
 //        dd($blogPost);
         return view('Backend.blogPostList', ['blogPost'=> $blogPost]);
     }
@@ -46,7 +46,8 @@ class BlogPostController extends Controller
             'Post_Content' => 'required',
             'Category_Id' => 'required',
             'Status' => 'required',
-            'Post_Image' => 'required'
+            'Post_Image' => 'required',
+
         ]);
 
         $imageName = '';
@@ -56,6 +57,9 @@ class BlogPostController extends Controller
         }
         BlogPost::create(array_merge($request->all(), [
             'Post_Image' => $imageName,
+            'create_by' => auth()->id(),
+            'Feature'=>$request->has('Feature'),
+            'Tranding'=>$request->has('Tranding')
         ]));
 
         return redirect()->route('Backend.blogPostList')->with('success', 'Blog added successfully!');
@@ -99,7 +103,8 @@ class BlogPostController extends Controller
             'Post_Content' => 'required',
             'Category_Id' => 'required',
             'Status' => 'required',
-            'Post_Image' => 'nullable|image'
+            'Post_Image' => 'nullable|image',
+
         ]);
 
         $blogPost = BlogPost::findOrFail($id);
@@ -114,6 +119,8 @@ class BlogPostController extends Controller
         $blogPost->Post_Content = $request->Post_Content;
         $blogPost->Category_Id = $request->Category_Id;
         $blogPost->Status = $request->Status;
+        $blogPost->Feature = $request->has('Feature');
+        $blogPost->Tranding = $request->has('Tranding');
 
         $blogPost->save();
 

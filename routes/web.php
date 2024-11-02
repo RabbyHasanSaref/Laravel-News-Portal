@@ -40,6 +40,9 @@ Route::middleware(['auth'])->group(function(){
 
 
 //Frontend Controller To Route
-Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'frontendData']);
+Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'index']);
+Route::get('category/{cat_id}', [\App\Http\Controllers\Frontend\FrontendController::class, 'categoryPost'])->name('Frontend.categoryPost');
+Route::get('details/{news_id}', [\App\Http\Controllers\Frontend\FrontendController::class, 'blogDetails'])->name('Frontend.detailsPost');
 
+Route::post('subscriber', [\App\Http\Controllers\Backend\SubscriberController::class, 'store'])->name('subscribe');
 

@@ -30,6 +30,11 @@
                 </select>
             </div>
             <div class="form-group">
+                <input type="checkbox" name="Feature"> Feature Post Yes
+
+                <input type="checkbox" name="Tranding"> Tranding Post Yes
+            </div>
+            <div class="form-group">
                 <label for="postImage">Post Image</label>
                 <input type="file" class="form-control-file" name="Post_Image" id="postImage" accept="image/*" >
             </div>

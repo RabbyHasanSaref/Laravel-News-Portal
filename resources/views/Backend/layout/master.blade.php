@@ -46,7 +46,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Bogra Blog Website 2024</span>
+                        <span>© Bogra Blog. All Rights Reserved. Develop by TMSS ICT LTD</span>
                     </div>
                 </div>
             </footer>

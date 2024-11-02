@@ -17,8 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('Post_Title');
             $table->text('Post_Content');
+            $table->string('create_by');
             $table->integer('Category_Id');
             $table->boolean('Status')->default(1);
+            $table->boolean('Feature')->default(false);
+            $table->boolean('Tranding')->default(false);
             $table->string('Post_Image')->nullable();
             $table->timestamps();
         });

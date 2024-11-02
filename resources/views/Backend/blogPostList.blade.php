@@ -19,18 +19,20 @@
                 <th>Status</th>
                 <th>Publish Date</th>
                 <th>Post Image</th>
+                <th>Author</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             @foreach($blogPost as $blog)
             <tr>
-                <td>{{$blog->Post_Title}}</td>
-                <td>{{$blog->Post_Content}}</td>
+                <td>{{Str::limit($blog->Post_Title, 50, ' ...')}}</td>
+                <td>{{Str::limit($blog->Post_Content, 50, ' ...')}}</td>
                 <td>{{ $blog->category->name}}</td>
                 <td>{{ $blog->Status == 1 ? 'Active' : 'Inactive' }}</td>
                 <td>{{ date('d-m-Y', strtotime($blog->created_at))}}</td>
                 <td><img src="{{env('STORAGE_PATH')}}/{{$blog->Post_Image}}" alt="Image 1" style="width: 50px; height: auto;"></td>
+                <td>{{$blog->author ? $blog->author->name : 'N/A' }}</td>
                 <td>
                     <a href="{{url('updateBlogPost', $blog->id)}}" class="btn btn-warning btn-sm" title="Edit">
                         <i class="fas fa-edit"></i>

@@ -1,38 +1,92 @@
 @extends('Frontend.layout.master')
 @section('content')
-    <div class="container-fluid mt-5 pt-3">
+    <!-- News With Sidebar Start -->
+    <div class="container-fluid pt-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    @if(count($posts)>0)
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-title">
-                                <h4 class="m-0 text-uppercase font-weight-bold">Category: {{ $posts->first()->category->name }}</h4>                            </div>
+                    <!-- News Detail Start -->
+                    <div class="position-relative mb-3">
+                        <img class="img-fluid w-100" src="{{env('STORAGE_PATH')}}/{{$posts->Post_Image}}" style="object-fit: cover;">
+                        <div class="bg-white border border-top-0 p-4">
+                            <div class="mb-3">
+                                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                   href="{{route('Frontend.categoryPost', $posts->category->id)}}">{{ $posts->category ? $posts->category->name : 'N/A' }}</a>
+                                <a class="text-body" href="">{{ date('d-m-Y', strtotime($posts->created_at))}}</a>
+                            </div>
+                            <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{$posts->Post_Title}}</h1>
+                            <p>{{$posts->Post_Content}}</p>
                         </div>
-                        @foreach($posts as $post)
-                        <div class="col-lg-6">
-                            <div class="position-relative mb-3">
-                                <img class="img-fluid w-100" src="{{env('STORAGE_PATH')}}/{{$post->Post_Image}}" style="object-fit: cover;  height: 300px;">
-                                <div class="bg-white border border-top-0 p-4">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                           href="">{{ $posts->first()->category->name }}</a>
-                                        <a class="text-body" href=""><small>{{ date('d-m-Y', strtotime($post->created_at))}}</small></a>
-                                    </div>
-                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="{{route('Frontend.detailsPost', $post->id)}}">{{Str::limit($post->Post_Title, 19, ' ...')}}</a>
-                                    <p class="m-0">{{Str::limit($post->Post_Content, 150, ' ...')}}</p>
+                        <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle mr-2" src="https://i.ibb.co.com/3WPvxLF/user.png" width="25" height="25" alt="">
+                                <span>{{ $posts->author ? $posts->author->name : 'N/A' }}</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+{{--                                <span class="ml-3"><i class="far fa-eye mr-2"></i>12345</span>--}}
+                                <span class="ml-3"><i class="far fa-comment mr-2"></i>123</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- News Detail End -->
+
+                    <!-- Comment List Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">3 Comments</h4>
+                        </div>
+                        <div class="bg-white border border-top-0 p-4">
+                            <div class="media mb-4">
+                                <img src="https://i.ibb.co.com/3WPvxLF/user.png" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                <div class="media-body">
+                                    <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
+                                        accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
                     </div>
-                    @else
-                        <div class="error-page text-center">
-                            <h1 class="display-1">404</h1>
-                            <h2>Oops! Page Not Found</h2>
+                    <!-- Comment List End -->
+
+                    <!-- Comment Form Start -->
+                    <div class="mb-3">
+                        <div class="section-title mb-0">
+                            <h4 class="m-0 text-uppercase font-weight-bold">Leave a comment</h4>
                         </div>
-                    @endif
+                        <div class="bg-white border border-top-0 p-4">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name">Name *</label>
+                                            <input type="text" class="form-control" id="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Email *</label>
+                                            <input type="email" class="form-control" id="email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    <input type="url" class="form-control" id="website">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message">Message *</label>
+                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <input type="submit" value="Leave a comment"
+                                           class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Comment Form End -->
                 </div>
 
                 <div class="col-lg-4">
@@ -123,4 +177,5 @@
             </div>
         </div>
     </div>
-  @endsection
+    <!-- News With Sidebar End -->
+@endsection
