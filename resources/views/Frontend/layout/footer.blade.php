@@ -3,15 +3,24 @@
     <div class="row py-4">
         <div class="col-lg-3 col-md-6 mb-5">
             <h5 class="mb-4 text-white text-uppercase font-weight-bold">Get In Touch</h5>
-            <p class="font-weight-medium"><i class="fa fa-map-marker-alt mr-2"></i>Bogra, Bangladesh</p>
-            <p class="font-weight-medium"><i class="fa fa-phone-alt mr-2"></i>+8801730283920</p>
-            <p class="font-weight-medium"><i class="fa fa-envelope mr-2"></i>info@bogra24news.com</p>
+            @if($footer)
+                <p class="font-weight-medium"><i class="fa fa-map-marker-alt mr-2"></i>{{ $footer->address }}</p>
+                <p class="font-weight-medium"><i class="fa fa-phone-alt mr-2"></i>+880{{ $footer->phone }}</p>
+                <p class="font-weight-medium"><i class="fa fa-envelope mr-2"></i>{{ $footer->email }}</p>
+            @else
+                <p class="m-0 text-center">No footer data available.</p>
+            @endif
             <h6 class="mt-4 mb-3 text-white text-uppercase font-weight-bold">Follow Us</h6>
             <div class="d-flex justify-content-start">
-                <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-instagram"></i></a>
-                <a class="btn btn-lg btn-secondary btn-lg-square" href="#"><i class="fab fa-youtube"></i></a>
+                @if($footer)
+
+                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="{{$footer->facebook}}"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="{{$footer->linkedIn}}"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="{{$footer->instagram}}"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-lg btn-secondary btn-lg-square" href="{{$footer->youtube}}"><i class="fab fa-youtube"></i></a>
+                @else
+                    <p class="m-0 text-center">No footer data available.</p>
+                @endif
             </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
@@ -35,7 +44,10 @@
     </div>
 </div>
 <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
-    <p class="m-0 text-center">&copy; <a href="#">Bogra Blog</a>. All Rights Reserved.
-        Develop by <a href="">TMSS ICT LTD</a></p>
+    @if($footer)
+        <p class="m-0 text-center">© {{ $footer->develop_by }}</p>
+    @else
+        <p class="m-0 text-center">No footer data available.</p>
+    @endif
 </div>
 <!-- Footer End -->

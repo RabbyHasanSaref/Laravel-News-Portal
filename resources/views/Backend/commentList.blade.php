@@ -14,21 +14,28 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Comment</th>
-                <th>Date</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
+            @foreach($data as $item)
             <tr>
-                <td>Rabby</td>
-                <td>Good News</td>
-                <td>10-29-24</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->email}}</td>
+                <td>{{$item->comment}}</td>
                 <td>
-                    <a href="#" class="btn btn-danger btn-sm" title="Delete">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
+                    <form action="{{url('deleteComment', $item->id)}}" method="post" style="display:inline;" >
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm" title="Delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
                 </td>
+            </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

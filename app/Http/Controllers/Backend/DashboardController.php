@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use App\Models\Category;
+use App\Models\GeneralSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,11 +23,13 @@ class DashboardController extends Controller
         $categoriesCount = $categories->count();
         $blog = BlogPost::all();
         $blogCount = $blog->count();
-//        dd($user);
+        $footer =GeneralSetting::first();
+//        dd($footer);
         return view('Backend.dashboard', [
             'user' => $user,
             'categoriesCount' => $categoriesCount,
-            'blogCount'=>$blogCount
+            'blogCount'=>$blogCount,
+            'footer' => $footer
         ]);
     }
 

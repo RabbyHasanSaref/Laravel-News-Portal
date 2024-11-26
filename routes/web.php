@@ -35,7 +35,16 @@ Route::middleware(['auth'])->group(function(){
     Route::get('userList', [\App\Http\Controllers\Backend\UserController::class, 'index']);
 
 //Comment Controller To Route
-    Route::get('commentList', [\App\Http\Controllers\Backend\CommentController::class, 'index']);
+    Route::get('comments', [\App\Http\Controllers\Backend\CommentController::class, 'index'])->name('commentList');
+    Route::delete('deleteComment/{id}', [\App\Http\Controllers\Backend\CommentController::class, 'destroy']);
+
+// General Setting To Route
+    Route::get('general-Setting', [\App\Http\Controllers\Backend\GeneralSettingController::class, 'index'])->name('generalSetting');
+    Route::get('createGeneralSetting', [\App\Http\Controllers\Backend\GeneralSettingController::class, 'create']);
+    Route::post('addGeneralSetting', [\App\Http\Controllers\Backend\GeneralSettingController::class, 'store']);
+    Route::get('editGeneralSetting/{id}', [\App\Http\Controllers\Backend\GeneralSettingController::class, 'edit'])->name('editGeneralSetting');
+    Route::post('editGeneralSetting/{id}', [\App\Http\Controllers\Backend\GeneralSettingController::class, 'update']);
+    Route::delete('deleteGeneralSetting/{id}', [\App\Http\Controllers\Backend\GeneralSettingController::class, 'destroy']);
 });
 
 
@@ -43,6 +52,7 @@ Route::middleware(['auth'])->group(function(){
 Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'index']);
 Route::get('category/{cat_id}', [\App\Http\Controllers\Frontend\FrontendController::class, 'categoryPost'])->name('Frontend.categoryPost');
 Route::get('details/{news_id}', [\App\Http\Controllers\Frontend\FrontendController::class, 'blogDetails'])->name('Frontend.detailsPost');
+Route::post('comment/{id}', [\App\Http\Controllers\Backend\CommentController::class, 'store']);
 
 Route::post('subscriber', [\App\Http\Controllers\Backend\SubscriberController::class, 'store'])->name('subscribe');
 

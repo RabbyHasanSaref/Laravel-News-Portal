@@ -23,6 +23,15 @@
                                     <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="{{route('Frontend.detailsPost', $post->id)}}">{{Str::limit($post->Post_Title, 19, ' ...')}}</a>
                                     <p class="m-0">{{Str::limit($post->Post_Content, 150, ' ...')}}</p>
                                 </div>
+                                <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle mr-2" src="https://i.ibb.co.com/3WPvxLF/user.png" width="25" height="25" alt="">
+                                        <span>{{ $post->author ? $post->author->name : 'N/A' }}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        {{--                                        <small class="ml-3"><i class="far fa-comment mr-2"></i>{{ $post->comments_count }}</small>--}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @endforeach

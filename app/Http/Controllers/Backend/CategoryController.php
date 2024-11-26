@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,8 +17,12 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category:: all();
+        $footer =GeneralSetting::first();
 //        dd($categories);
-        return view('Backend.categoryList', ['categories' => $categories]);
+        return view('Backend.categoryList', [
+            'categories' => $categories,
+            'footer'=>$footer
+        ]);
     }
 
     /**
@@ -28,7 +33,9 @@ class CategoryController extends Controller
     public function create()
     {
 
-        return view('Backend.createCategory');
+        $footer =GeneralSetting::first();
+
+        return view('Backend.createCategory', [ 'footer'=>$footer]);
     }
 
     /**
@@ -68,7 +75,11 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('Backend.updateCategory', ['category'=> $category]);
+        $footer =GeneralSetting::first();
+        return view('Backend.updateCategory', [
+            'category'=> $category,
+            'footer'=>$footer
+        ]);
     }
 
     /**

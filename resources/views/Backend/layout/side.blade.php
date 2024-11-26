@@ -6,7 +6,13 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-newspaper"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Bogra Blog<sup></sup></div>
+        <div class="sidebar-brand-text mx-3">
+            @if($footer)
+                <p>{{ $footer->app_name }}</p>
+            @else
+                <p>No footer data available.</p>
+            @endif
+        </div>
     </a>
 
     <!-- Divider -->
@@ -51,7 +57,7 @@
         </a>
         <div id="collapseCommentManagement" class="collapse" aria-labelledby="headingCommentManagement" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{url('commentList')}}">
+                <a class="collapse-item" href="{{route('commentList')}}">
                     <i class="fas fa-comment-dots"></i> Comments
                 </a>
             </div>
@@ -83,15 +89,15 @@
         </a>
         <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">
+                <a class="collapse-item" href="{{url('general-Setting')}}">
                     <i class="fas fa-cogs"></i> General site settings
                 </a>
-                <a class="collapse-item" href="">
-                    <i class="fas fa-search"></i> SEO settings
-                </a>
-                <a class="collapse-item" href="">
-                    <i class="fas fa-link"></i> Permalink URL settings
-                </a>
+{{--                <a class="collapse-item" href="">--}}
+{{--                    <i class="fas fa-search"></i> SEO settings--}}
+{{--                </a>--}}
+{{--                <a class="collapse-item" href="">--}}
+{{--                    <i class="fas fa-link"></i> Permalink URL settings--}}
+{{--                </a>--}}
             </div>
         </div>
     </li>

@@ -29,11 +29,11 @@
                     </li>
 
                     <!-- Login Button -->
-                    <li class="nav-item p-3">
-                        <a class="btn btn-primary btn-sm ml-2 font-weight-bold" href="#">
-                            <i class="fas fa-sign-in-alt"></i> Login
-                        </a>
-                    </li>
+{{--                    <li class="nav-item p-3">--}}
+{{--                        <a class="btn btn-primary btn-sm ml-2 font-weight-bold" href="#">--}}
+{{--                            <i class="fas fa-sign-in-alt"></i> Login--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
             </nav>
         </div>
@@ -42,7 +42,12 @@
     <div class="row align-items-center bg-white py-3 px-lg-5">
         <div class="col-lg-4">
             <a href="{{url('/')}}" class="navbar-brand p-0 d-none d-lg-block">
-                <h1 class="m-0 display-4 text-uppercase text-primary">Bogra<span class="text-secondary font-weight-normal">Blog</span></h1>
+                @if($footer)
+                    <h1 class="m-0 display-4 text-uppercase text-primary">{{$footer->app_name}}</h1>
+                @else
+                    <p class="m-0 text-center">No footer data available.</p>
+                @endif
+
             </a>
         </div>
         <div class="col-lg-8 text-center text-lg-right">

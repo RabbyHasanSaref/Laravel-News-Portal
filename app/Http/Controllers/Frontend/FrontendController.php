@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -18,13 +20,19 @@ class FrontendController extends Controller
         $featurePost = BlogPost::where('Feature', true)->get();
         $trandingPost = BlogPost::where('Tranding', true)->get();
         $latestPost = BlogPost::with(['author'])->where('Status', true)->get();
-        return view('Frontend.frontend', ['categories'=> $categories,
+        $footer =GeneralSetting::first();
+
+//        dd($commentCount);
+        return view('Frontend.frontend', [
+
+            'categories'=> $categories,
             'slider'=> $slider,
             'card'=> $card,
             'breaking'=> $breaking,
             'featurePost' => $featurePost,
             'trandingPost' => $trandingPost,
-            'latestPost' => $latestPost
+            'latestPost' => $latestPost,
+            'footer' => $footer,
         ]);
     }
 
@@ -33,13 +41,16 @@ class FrontendController extends Controller
     {
         {
             $categories = Category::all();
-            $posts = BlogPost::with('category')->where('Category_Id', $cat_id)->get();
+            $posts = BlogPost::with('category', 'author')->where('Category_Id', $cat_id)->get();
             $trandingPost = BlogPost::where('Tranding', true)->get();
+            $footer =GeneralSetting::first();
 
+//            dd($posts);
             return view('Frontend.categoryPost',[
                 'categories'=>$categories,
                 'posts'=>$posts,
                 'trandingPost' => $trandingPost,
+                'footer' => $footer,
             ]);
         }
     }
@@ -49,13 +60,22 @@ class FrontendController extends Controller
         $categories = Category::all();
         $posts = BlogPost::with(['author', 'category'])->findOrFail($news_id);
         $trandingPost = BlogPost::where('Tranding', true)->get();
+        $footer =GeneralSetting::first();
 
-//        dd($posts);
+        $comments = $posts->comments()->take(5)->skip(0)->get();
+        $commentCount = $posts->comments()->count();
+//        dd($comments);
         return view('Frontend.detailsPost', [
             'posts'=>$posts,
             'categories'=> $categories,
             'trandingPost' => $trandingPost,
+            'footer' => $footer,
+
+            'posts' => $posts,
+            'comments' => $comments,
+            'commentCount' => $commentCount,
         ]);
     }
+
 
 }

@@ -128,7 +128,7 @@
                                            href="{{route('Frontend.categoryPost', $latest->category->id)}}">{{ $latest->category->name}}</a>
                                         <a class="text-body" href=""><small>{{ date('d-m-Y', strtotime($latest->created_at))}}</small></a>
                                     </div>
-                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="{{route('Frontend.categoryPost', $latest->category->id)}}">{{ $latest->category->name}}</a>
+                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="{{route('Frontend.detailsPost', $latest->id)}}">{{ Str::limit($latest->Post_Title,  19, ' ...')}}</a>
                                     <p class="m-0">{{Str::limit($latest->Post_Content, 150, ' ...')}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
@@ -137,7 +137,7 @@
                                         <span>{{ $latest->author ? $latest->author->name : 'N/A' }}</span>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <small class="ml-3"><i class="far fa-comment mr-2"></i>123</small>
+{{--                                        <small class="ml-3"><i class="far fa-comment mr-2"></i>{{ $post->comments_count }}</small>--}}
                                     </div>
                                 </div>
                             </div>
@@ -191,10 +191,10 @@
                                 <img class="img-fluid" style="width: 150px" src="{{env('STORAGE_PATH')}}/{{$tranding->Post_Image}}" alt="">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="{{route('Frontend.categoryPost', $feature->category->id)}}">{{ $feature->category->name}}</a>
-                                        <a class="text-body" href=""><small>{{ date('d-m-Y', strtotime($feature->created_at))}}</small></a>
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="{{route('Frontend.categoryPost', $tranding->category->id)}}">{{ $tranding->category->name}}</a>
+                                        <a class="text-body" href=""><small>{{ date('d-m-Y', strtotime($tranding->created_at))}}</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="{{route('Frontend.detailsPost', $feature->id)}}">{{Str::limit($feature->Post_Title, 10, ' ...')}}</a>
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="{{route('Frontend.detailsPost', $tranding->id)}}">{{Str::limit($tranding->Post_Title, 10, ' ...')}}</a>
                                 </div>
                             </div>
                             @endforeach

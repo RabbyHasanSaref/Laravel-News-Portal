@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use App\Models\Category;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 
 class BlogPostController extends Controller
@@ -17,8 +18,12 @@ class BlogPostController extends Controller
     public function index()
     {
         $blogPost = BlogPost::with(['category', 'author'])->get();
+        $footer =GeneralSetting::first();
 //        dd($blogPost);
-        return view('Backend.blogPostList', ['blogPost'=> $blogPost]);
+        return view('Backend.blogPostList', [
+            'blogPost'=> $blogPost,
+            'footer'=>$footer
+        ]);
     }
 
     /**
@@ -29,8 +34,12 @@ class BlogPostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $footer =GeneralSetting::first();
 //        dd($category);
-        return view('Backend.createBlogPost', ['categories'=> $categories]);
+        return view('Backend.createBlogPost', [
+            'categories'=> $categories,
+            'footer'=>$footer
+        ]);
     }
 
     /**
@@ -86,7 +95,12 @@ class BlogPostController extends Controller
     {
         $blogPost = BlogPost::where('id', $id)->first();
         $categories = Category::all();
-        return view('Backend.updateBlogPost', ['blogPost'=> $blogPost, 'categories'=> $categories]);
+        $footer =GeneralSetting::first();
+        return view('Backend.updateBlogPost', [
+            'blogPost'=> $blogPost,
+            'categories'=> $categories,
+            'footer'=>$footer
+        ]);
     }
 
     /**

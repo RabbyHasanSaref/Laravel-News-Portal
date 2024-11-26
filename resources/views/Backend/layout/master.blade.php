@@ -46,7 +46,12 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>© Bogra Blog. All Rights Reserved. Develop by TMSS ICT LTD</span>
+                        <span> </span>
+                        @if($footer)
+                           <p>© {{ $footer->develop_by }}</p>
+                        @else
+                            <p>No footer data available.</p>
+                        @endif
                     </div>
                 </div>
             </footer>

@@ -23,6 +23,11 @@ class BlogPost extends Model
         return $this->belongsTo(Category::class, 'Category_Id', 'id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function author(){
         return $this->belongsTo(User::class,'create_by','id');
     }

@@ -24,7 +24,7 @@
                             </div>
                             <div class="d-flex align-items-center">
 {{--                                <span class="ml-3"><i class="far fa-eye mr-2"></i>12345</span>--}}
-                                <span class="ml-3"><i class="far fa-comment mr-2"></i>123</span>
+                                <span class="ml-3"><i class="far fa-comment mr-2"></i>{{$commentCount}}</span>
                             </div>
                         </div>
                     </div>
@@ -33,18 +33,18 @@
                     <!-- Comment List Start -->
                     <div class="mb-3">
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">3 Comments</h4>
+                            <h4 class="m-0 text-uppercase font-weight-bold">{{$commentCount}} Comments</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-4">
+                            @foreach($comments as $comment)
                             <div class="media mb-4">
                                 <img src="https://i.ibb.co.com/3WPvxLF/user.png" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                 <div class="media-body">
-                                    <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                        accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
+                                    <h6><a class="text-secondary font-weight-bold" href="">{{$comment->name}}</a></h6>
+                                    <p>{{$comment->comment}}</p>
                                 </div>
                             </div>
+                                @endforeach
                         </div>
                     </div>
                     <!-- Comment List End -->
@@ -55,29 +55,26 @@
                             <h4 class="m-0 text-uppercase font-weight-bold">Leave a comment</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-4">
-                            <form>
+                            <form action="{{url('comment', $posts->id)}}" method="post">
+                                @csrf
                                 <div class="form-row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="name">Name *</label>
-                                            <input type="text" class="form-control" id="name">
+                                            <input type="text" name="name" class="form-control" id="name">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Email *</label>
-                                            <input type="email" class="form-control" id="email">
+                                            <input type="email" name="email" class="form-control" id="email">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website">
-                                </div>
 
                                 <div class="form-group">
-                                    <label for="message">Message *</label>
-                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                    <label for="message">comment *</label>
+                                    <textarea id="message" name="comment" cols="30" rows="5" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group mb-0">
                                     <input type="submit" value="Leave a comment"
