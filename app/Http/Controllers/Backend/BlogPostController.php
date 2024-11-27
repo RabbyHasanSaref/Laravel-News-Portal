@@ -10,11 +10,21 @@ use Illuminate\Http\Request;
 
 class BlogPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $news['news'] = BlogPost::where('Post_Title', 'LIKE', "%$query%")
+            ->orWhere('Post_Content', 'LIKE', "%$query%")
+            ->paginate(10);
+
+
+//        dd($news);
+        return view('Frontend.newsSearch', $news);
+    }
+
     public function index()
     {
         $blogPost = BlogPost::with(['category', 'author'])->get();
@@ -26,11 +36,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $categories = Category::all();
@@ -42,12 +48,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -74,23 +75,30 @@ class BlogPostController extends Controller
         return redirect()->route('Backend.blogPostList')->with('success', 'Blog added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        $categories = Category::all();
+        $posts = BlogPost::with(['author', 'category'])->findOrFail($id);
+        $trandingPost = BlogPost::where('Tranding', true)->get();
+        $footer =GeneralSetting::first();
+
+        $comments = $posts->comments()->take(5)->skip(0)->get();
+        $commentCount = $posts->comments()->count();
+//        dd($posts);
+        return view('Frontend.detailsPost', [
+            'posts'=>$posts,
+            'categories'=> $categories,
+            'trandingPost' => $trandingPost,
+            'footer' => $footer,
+
+            'posts' => $posts,
+            'comments' => $comments,
+            'commentCount' => $commentCount,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $blogPost = BlogPost::where('id', $id)->first();
@@ -103,13 +111,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -142,16 +144,12 @@ class BlogPostController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $category = BlogPost::find($id);
         $category->delete();
         return redirect()->route('Backend.blogPostList')->with('success', 'Blog Delete successfully');
     }
+
 }

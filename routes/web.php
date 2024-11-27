@@ -54,5 +54,9 @@ Route::get('category/{cat_id}', [\App\Http\Controllers\Frontend\FrontendControll
 Route::get('details/{news_id}', [\App\Http\Controllers\Frontend\FrontendController::class, 'blogDetails'])->name('Frontend.detailsPost');
 Route::post('comment/{id}', [\App\Http\Controllers\Backend\CommentController::class, 'store']);
 
+Route::get('searching', [\App\Http\Controllers\Backend\BlogPostController::class, 'search']);
+Route::get('/blog/{id}', [\App\Http\Controllers\Backend\BlogPostController::class, 'show'])->name('blog.show');
+
+
 Route::post('subscriber', [\App\Http\Controllers\Backend\SubscriberController::class, 'store'])->name('subscribe');
 
