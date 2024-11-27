@@ -20,3 +20,7 @@ DB_USERNAME=your_database_username
 DB_PASSWORD=your_database_password
 
 ## php artisan migrate
+
+# http://127.0.0.1:8000/admin/dashboard
+# user : admin@gmail.com
+# pass : 123456
