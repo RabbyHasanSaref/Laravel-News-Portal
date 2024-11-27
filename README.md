@@ -24,3 +24,5 @@ DB_PASSWORD=your_database_password
 ## http://127.0.0.1:8000/admin/dashboard
 ## user : admin@gmail.com
 ## pass : 123456
+
+![Alt Text](news.jpeg)
