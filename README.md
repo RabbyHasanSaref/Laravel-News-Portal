@@ -25,4 +25,4 @@ DB_PASSWORD=your_database_password
 ## user : admin@gmail.com
 ## pass : 123456
 
-![Alt Text](news.jpeg)
+![Alt Text](/public/news.jpeg)
