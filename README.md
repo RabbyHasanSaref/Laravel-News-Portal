@@ -26,3 +26,4 @@ DB_PASSWORD=your_database_password
 ## pass : 123456
 
 ![Alt Text](/public/news.jpeg)
+![Alt Text](/public/news1.jpeg)
